@@ -15,7 +15,7 @@
 
     <script>
         // Fecha objetivo para la cuenta regresiva
-        const targetDate = new Date("2025-02-23T23:59:59").getTime();
+        const targetDate = new Date("2025-02-23T20:00:00").getTime();
 
         function updateCountdown() {
             const now = new Date().getTime();
@@ -31,7 +31,7 @@
 
             if (timeLeft < 0) {
                 clearInterval(interval);
-                document.getElementById("countdown").innerHTML = "¡Tiempo terminado!";
+                document.getElementById("countdown").innerHTML = "¡Ya Iniciamos!";
             }
         }
 

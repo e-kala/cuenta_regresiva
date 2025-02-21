@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cuenta Regresiva</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            margin-top: 50px;
+        }
+        #countdown {
+            font-size: 2em;
+            color: #333;
+        }
+    </style>
+</head>
+<body>
+    <div id="countdown"></div>
+
+    <script>
+        // Fecha objetivo para la cuenta regresiva
+        const targetDate = new Date("2023-12-31T23:59:59").getTime();
+
+        function updateCountdown() {
+            const now = new Date().getTime();
+            const timeLeft = targetDate - now;
+
+            const days = Math.floor(timeLeft / (1000 * 60 * 60 * 24));
+            const hours = Math.floor((timeLeft % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+            const minutes = Math.floor((timeLeft % (1000 * 60 * 60)) / (1000 * 60));
+            const seconds = Math.floor((timeLeft % (1000 * 60)) / 1000);
+
+            document.getElementById("countdown").innerHTML = 
+                `${days}d ${hours}h ${minutes}m ${seconds}s`;
+
+            if (timeLeft < 0) {
+                clearInterval(interval);
+                document.getElementById("countdown").innerHTML = "¡Tiempo terminado!";
+            }
+        }
+
+        const interval = setInterval(updateCountdown, 1000);
+        updateCountdown(); // Llamada inicial para evitar el retraso de 1 segundo
+    </script>
+</body>
+</html>

@@ -1,40 +1,44 @@
+<style>
+  body {
+    font-family: Arial, sans-serif;
+    text-align: center;
+    margin-top: 50px;
+  }
+  #countdown {
+    font-size: 2em;
+    color: #333;
+  }
+</style>
 
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            text-align: center;
-            margin-top: 50px;
-        }
-        #countdown {
-            font-size: 2em;
-            color: #333;
-        }
-    </style>
+<div id="countdown"></div>
+<center>
+  <p>4 De Abril 8:00pm</p>
+</center>
+<script>
+  // Fecha objetivo para la cuenta regresiva
+  const targetDate = new Date("2025-04-04T20:00:00").getTime();
 
-    <div id="countdown"></div>
+  function updateCountdown() {
+    const now = new Date().getTime();
+    const timeLeft = targetDate - now;
 
-    <script>
-        // Fecha objetivo para la cuenta regresiva
-        const targetDate = new Date("2025-04-04T20:00:00").getTime();
+    const days = Math.floor(timeLeft / (1000 * 60 * 60 * 24));
+    const hours = Math.floor(
+      (timeLeft % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60)
+    );
+    const minutes = Math.floor((timeLeft % (1000 * 60 * 60)) / (1000 * 60));
+    const seconds = Math.floor((timeLeft % (1000 * 60)) / 1000);
 
-        function updateCountdown() {
-            const now = new Date().getTime();
-            const timeLeft = targetDate - now;
+    document.getElementById(
+      "countdown"
+    ).innerHTML = `${days}d ${hours}h ${minutes}m ${seconds}s`;
 
-            const days = Math.floor(timeLeft / (1000 * 60 * 60 * 24));
-            const hours = Math.floor((timeLeft % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-            const minutes = Math.floor((timeLeft % (1000 * 60 * 60)) / (1000 * 60));
-            const seconds = Math.floor((timeLeft % (1000 * 60)) / 1000);
+    if (timeLeft < 0) {
+      clearInterval(interval);
+      document.getElementById("countdown").innerHTML = "¡Ya Iniciamos!";
+    }
+  }
 
-            document.getElementById("countdown").innerHTML = 
-                `${days}d ${hours}h ${minutes}m ${seconds}s`;
-
-            if (timeLeft < 0) {
-                clearInterval(interval);
-                document.getElementById("countdown").innerHTML = "¡Ya Iniciamos!";
-            }
-        }
-
-        const interval = setInterval(updateCountdown, 1000);
-        updateCountdown(); // Llamada inicial para evitar el retraso de 1 segundo
-    </script>
+  const interval = setInterval(updateCountdown, 1000);
+  updateCountdown(); // Llamada inicial para evitar el retraso de 1 segundo
+</script>
